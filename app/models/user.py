@@ -2,5 +2,5 @@ from odmantic import Model, Field
 
 
 class User(Model):
-    username: str = Field(..., description="The user's username")
+    nickname: str = Field(..., description="The user's nickname")
     password: str = Field(..., description="The user's password")
