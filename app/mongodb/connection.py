@@ -15,8 +15,6 @@ class MongoConnection:
             mongo_uri: str,
             database: str,
             driver_info: DriverInfo,
-            *,
-            connect_timeout: Optional[int] = 5000,
     ):
         if MongoConnection._instance is not None:
             raise RuntimeError("Use 'get_connection' to access the MongoConnection instance.")
@@ -24,7 +22,6 @@ class MongoConnection:
         self.client = motor_asyncio.AsyncIOMotorClient(
             mongo_uri,
             driver=driver_info,
-            serverSelectionTimeoutMS=connect_timeout,
         )
         self.engine = AIOEngine(client=self.client, database=database)
 
@@ -40,15 +37,12 @@ class MongoConnection:
             mongo_uri: str,
             database: str,
             driver_info: DriverInfo,
-            *,
-            connect_timeout: Optional[int] = None
     ) -> "MongoConnection":
         if cls._instance is None:
             cls._instance = cls(
                 mongo_uri=mongo_uri,
                 database=database,
                 driver_info=driver_info,
-                connect_timeout=connect_timeout
             )
         return cls._instance
 
