@@ -1,12 +1,26 @@
 import asyncio
 
-from app import mongodb, schemas
+import uvicorn
+from fastapi import FastAPI
+
+from app import mongodb, api
+
+fastapi_app = FastAPI(title="UBBClicker API")
+fastapi_app.include_router(api.root_router)
+
+
+async def configure_database():
+    tables = [mongodb.user]
+
+    tasks = [table.configure() for table in tables]
+
+    await asyncio.gather(*tasks)
 
 
 async def main():
-    user_db = await mongodb.user.create(schemas.UserCreate(nickname="oskar", password="kutas"))
+    await configure_database()
 
-    print(user_db)
+    uvicorn.run("main:fastapi_app", port=3001, reload=True)
 
 
 if __name__ == "__main__":
