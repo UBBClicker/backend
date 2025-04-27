@@ -1,0 +1,63 @@
+Test run started at: 2025-04-27 01:42:47
+
+===== STDOUT =====
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-7.4.0, pluggy-1.5.0 -- C:\Users\gordo\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\python.exe
+cachedir: .pytest_cache
+rootdir: D:\ubb\clicker\backend1
+plugins: anyio-4.8.0, asyncio-0.21.1
+asyncio: mode=Mode.STRICT
+collecting ... collected 15 items
+
+tests/test_game.py::test_get_game_state PASSED                           [  6%]
+tests/test_game.py::test_process_click PASSED                            [ 13%]
+tests/test_game.py::test_buy_item PASSED                                 [ 20%]
+tests/test_game.py::test_get_leaderboard PASSED                          [ 26%]
+tests/test_game.py::test_passive_points_generation PASSED                [ 33%]
+tests/test_game.py::test_calculate_item_cost PASSED                      [ 40%]
+tests/test_item.py::test_create_item PASSED                              [ 46%]
+tests/test_item.py::test_get_all_items PASSED                            [ 53%]
+tests/test_item.py::test_get_item_by_id PASSED                           [ 60%]
+tests/test_item.py::test_update_item PASSED                              [ 66%]
+tests/test_item.py::test_delete_item PASSED                              [ 73%]
+tests/test_item.py::test_get_user_items PASSED                           [ 80%]
+tests/test_user.py::test_register_user PASSED                            [ 86%]
+tests/test_user.py::test_login_user PASSED                               [ 93%]
+tests/test_user.py::test_get_user_me PASSED                              [100%]
+
+============================== warnings summary ===============================
+C:\Users\gordo\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\pydantic\_internal\_config.py:295
+C:\Users\gordo\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\pydantic\_internal\_config.py:295
+C:\Users\gordo\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\pydantic\_internal\_config.py:295
+C:\Users\gordo\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\pydantic\_internal\_config.py:295
+C:\Users\gordo\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\pydantic\_internal\_config.py:295
+C:\Users\gordo\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\pydantic\_internal\_config.py:295
+C:\Users\gordo\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\pydantic\_internal\_config.py:295
+  C:\Users\gordo\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\pydantic\_internal\_config.py:295: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+app\database.py:15
+  D:\ubb\clicker\backend1\app\database.py:15: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+app\api\game.py:201
+  D:\ubb\clicker\backend1\app\api\game.py:201: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @game_router.on_event("startup")
+
+tests/test_item.py::test_delete_item
+  D:\ubb\clicker\backend1\app\crud\base.py:50: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    obj = db.query(self.model).get(id)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 15 passed, 10 warnings in 7.67s =======================
+
+===== STDERR =====
+
+
+Exit code: 0
+Test run completed at: 2025-04-27 01:42:57
