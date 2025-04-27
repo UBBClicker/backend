@@ -94,3 +94,47 @@ def test_get_user_me(client: TestClient, db_session: Session):
     # Try without token
     response = client.get("/user/me")
     assert response.status_code == 401
+
+
+def test_refresh_token(client: TestClient, db_session: Session):
+    """Test token refresh endpoint."""
+    # Create a test user
+    user_create = UserCreate(nickname="refreshuser", password="password123")
+    user = user_crud.register(db_session, user_create)
+    
+    # Login to get initial token
+    response = client.post(
+        "/user/login",
+        data={"username": "refreshuser", "password": "password123"}
+    )
+    assert response.status_code == 200
+    initial_token = response.json()["access_token"]
+    
+    # Use the token to refresh and get a new token
+    response = client.post(
+        "/user/refresh-token",
+        headers={"Authorization": f"Bearer {initial_token}"}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert "access_token" in data
+    assert data["token_type"] == "bearer"
+    refreshed_token = data["access_token"]
+    
+    # Verify that the refreshed token is different from the initial token
+    assert initial_token != refreshed_token
+    
+    # Verify that the new token is valid by using it to access a protected endpoint
+    response = client.get(
+        "/user/me",
+        headers={"Authorization": f"Bearer {refreshed_token}"}
+    )
+    assert response.status_code == 200
+    assert response.json()["nickname"] == "refreshuser"
+    
+    # Try with invalid token
+    response = client.post(
+        "/user/refresh-token",
+        headers={"Authorization": "Bearer invalidtoken"}
+    )
+    assert response.status_code == 401

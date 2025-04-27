@@ -12,7 +12,7 @@ from app.schemas.token import TokenData
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # Constants
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
+ACCESS_TOKEN_EXPIRE_MINUTES = 15  # Token expires after 15 minutes of inactivity
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
